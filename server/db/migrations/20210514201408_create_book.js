@@ -4,6 +4,7 @@ exports.up = function(knex) {
     table.increments('id').primary();
     table.string('name', 255).notNullable();
     table.string('author', 1000).notNullable();
+    table.unique(['name', 'author']);
     table.timestamps(true, true);
   });
 };

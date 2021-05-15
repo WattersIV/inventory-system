@@ -1,7 +1,12 @@
-const express = require('express')
-const router = express.Router()
-import * as book from '../controllers/book/export'
-import * as store from '../controllers/store/export'
-import * as store_book from '../controllers/book_store/export'
+import express from 'express'
 
-module.exports = router
+export const router = express.Router()
+
+import * as book from '../controllers/book/export.js'
+import * as store from '../controllers/store/export.js'
+import * as store_book from '../controllers/store_book/export.js'
+
+router.post(
+  '/book/create',
+  book.c.createBook
+)

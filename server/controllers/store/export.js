@@ -1,6 +1,6 @@
-import * as r from "./read";
-import * as c from "./create";
-import * as u from "./update";
-import * as d from "./delete";
+import * as r from "./read.js";
+import * as c from "./create.js";
+import * as u from "./update.js";
+import * as d from "./delete.js";
 
 export { r, u, c, d };
