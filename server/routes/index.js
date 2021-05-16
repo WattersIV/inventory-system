@@ -11,15 +11,28 @@ router.post(
   '/book/create',
   book.c.createBook
 )
+router.delete(
+  '/book/delete',
+  book.d.deleteBook
+)
 
 //Store routes 
 router.post(
   '/store/create',
   store.c.createStore
 )
+router.delete(
+  '/store/delete',
+  store.d.deleteStore
+)
 
-//Store routes 
+//Store_book routes 
 router.post(
   '/store_book/create',
   store_book.c.createStoreBook
+)
+
+router.delete(
+  '/store_book/delete',
+  store_book.d.deleteStoreBook
 )

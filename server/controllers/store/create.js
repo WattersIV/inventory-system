@@ -18,6 +18,7 @@ export const createStore = async (
       .returning('id');
     res.status(201).json({ id: id })
   } catch(err) {
+    if (err.code === "23505") return res.status(422).json({ message: 'Store already exists' })
     res.status(500).json({ message: err })
   }
 }

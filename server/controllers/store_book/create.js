@@ -20,6 +20,8 @@ export const createStoreBook = async (
       .returning('id');
     res.status(201).json({ id: id })
   } catch(err) {
+    console.log(err)
+    if (err.code === "23505") return res.status(422).json({ message: 'This book already exists at this store' })
     res.status(500).json({ message: err })
   }
 }
