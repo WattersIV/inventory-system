@@ -1,5 +1,5 @@
 
-export const knexfile = {
+export default {
   development: {
     client: 'postgresql',
     connection: `postres://postgres:1234@localhost:5432/inventory`,
@@ -9,6 +9,7 @@ export const knexfile = {
     },
     migrations: {
       tableName: 'knex_migrations',
+      loadExtensions: ['cjs']
     },
   },
 };
