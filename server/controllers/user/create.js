@@ -1,5 +1,6 @@
 import { db } from '../../db/db.js'
 import jwt from 'jsonwebtoken'
+import crypto from "crypto";
 
 export const createNewUser = async (
   req,
@@ -23,7 +24,7 @@ export const createNewUser = async (
       .returning('id')
     const user = {
       username,
-      rawPassword
+      password
     }
     const token = await createAccessToken(user)
     res.status(201).json({ token })

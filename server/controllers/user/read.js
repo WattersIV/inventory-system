@@ -2,7 +2,6 @@ import { db } from '../../db/db.js'
 import jwt from 'jsonwebtoken'
 import crypto from "crypto";
 import { createAccessToken } from './create.js'
-import { updateLastLogin } from './update.js'
 
 export const login = async (
   req,
@@ -17,11 +16,11 @@ export const login = async (
   try {
     //Checking if username exists and grabbing password
     const response = await db('user')
-      .select('password')
+      .select('password', 'id')
       .where({
         username
       })
-      const { password, id } = response
+      const { password, id } = response[0]
     //Check if password matches one found for that user
     try {
       await verifyPassword(rawPassword, password)
@@ -32,7 +31,6 @@ export const login = async (
         password,
       }
       const accessToken = await createAccessToken(user)
-      await updateLastLogin(id)
       res.status(200).json({ accessToken })
     } catch (err) {
       //Invalid password
@@ -59,7 +57,6 @@ export const verifyAccessToken = async (
     //Invalid token
     if (err) return res.sendStatus(403)
     //valid token
-    req.user = user
     next()
   })
 }
@@ -73,6 +70,7 @@ export const verifyPassword = (rawPassword, hashedPassword) => {
     const hashedInputPassword = crypto
       .scryptSync(rawPassword, dbSalt, 64)
       .toString("hex");
+    console.log(hashedInputPassword, dbPassword)
     if (hashedInputPassword === dbPassword) {
       resolve("success");
     } else {
@@ -97,9 +95,10 @@ export const checkIfUserExists = async (
       .select('*')
       .where({ username })
     //Case where there is a user already
+    console.log(response)
+    if (!response.length) return next()
     res.status(422).json({ message: 'Username already in use' })
   } catch (err) {
-    //if (err.code === [no user code]) return next()
     res.status(500).json({ message: err })
   }
 }

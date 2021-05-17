@@ -9,7 +9,6 @@ export default {
     },
     migrations: {
       tableName: 'knex_migrations',
-      loadExtensions: ['cjs']
     },
   },
 };
