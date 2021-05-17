@@ -78,22 +78,26 @@ export const verifyPassword = (rawPassword, hashedPassword) => {
   });
 }
 
-export const hashPassword = (rawPassword) => {
-  console.log("hash password");
-  return new Promise(function (resolve, reject) {
-    const salt = Buffer.from(
-      Array(32)
-        .fill(0)
-        .map(() => Math.random() * 128)
-    );
-    crypto.scrypt(rawPassword, salt, 64, (err, derivedKey) => {
-      if (err) {
-        throw err;
-      } else {
-        resolve(salt.toString("hex") + ":" + derivedKey.toString("hex"));
-      }
-    });
-  });
-}
 
+export const checkIfUserExists = async (
+  req,
+  res,
+  next
+) => {
+  console.log('check if user exists')
+  const { username, rawPassword } = req.body
+  //If no username or pass return 400 and promt user 
+  if ( !username || !rawPassword ) res.status(400).json({ message: 'Missing credientals'})
+
+  try {
+    const response = await db('user')
+      .select('*')
+      .where({ username })
+    //Case where there is a user already
+    res.status(422).json({ message: 'Username already in use' })
+    } catch (err) {
+      //if (err.code === [no user code]) return next()
+      res.status(500).json({ message: err })
+  }
+}
 

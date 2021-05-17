@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
   const timestamp = Date.now();
   return knex.schema.createTable('user', (table) => {
