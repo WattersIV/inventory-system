@@ -19,6 +19,10 @@ router.delete(
   '/book/delete',
   book.d.deleteBook
 )
+router.put(
+  '/book/update',
+  book.u.updateBook
+)
 
 //Store routes 
 router.get(
@@ -33,6 +37,10 @@ router.delete(
   '/store/delete',
   store.d.deleteStore
 )
+router.put(
+  '/store/update',
+  store.u.updateStore
+)
 
 //Store_book routes 
 router.get(
@@ -43,8 +51,11 @@ router.post(
   '/store_book/create',
   store_book.c.createStoreBook
 )
-
 router.delete(
   '/store_book/delete',
   store_book.d.deleteStoreBook
+)
+router.put(
+  '/store_book/update',
+  store_book.u.updateStoreBook
 )
