@@ -5,6 +5,13 @@ export const router = express.Router()
 import * as book from '../controllers/book/export.js'
 import * as store from '../controllers/store/export.js'
 import * as store_book from '../controllers/store_book/export.js'
+import * as user from '../controllers/user/export.js'
+
+//User routes
+router.get(
+  '/user/login',
+  user.r.login
+)
 
 //Book routes
 router.get(
