@@ -47,6 +47,10 @@ router.get(
   '/store_book/get/id',
   store_book.r.getStoreBookbyId
 )
+router.get(
+  '/store_book/get/inventory',
+  store_book.r.getStoreBookInventory
+)
 router.post(
   '/store_book/create',
   store_book.c.createStoreBook
