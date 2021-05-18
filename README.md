@@ -5,11 +5,11 @@
 - Create new postgres database
 
 Fill in these varibles to your .env file
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-DB_PORT=
-JWT_KET=
+DB_NAME= <br/>
+DB_USER= <br/>
+DB_PASSWORD= <br/>
+DB_PORT= <br/>
+JWT_KET= <br/>
 
 - run `npm run dev`
 - open another terminal 
