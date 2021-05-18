@@ -1,6 +1,7 @@
 import { db } from '../../db/db.js'
 import jwt from 'jsonwebtoken'
 import crypto from "crypto";
+import {} from 'dotenv/config'
 
 export const createNewUser = async (
   req,
@@ -35,7 +36,7 @@ export const createNewUser = async (
 
 export const createAccessToken = async (user) => {
   //Setting jwt with no expiry
-  return jwt.sign(user, 'secret')
+  return jwt.sign(user, `${process.env.JWT_KEY}`)
 }
 
 export const hashPassword = async (rawPassword) => {

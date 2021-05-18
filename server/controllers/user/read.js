@@ -2,6 +2,7 @@ import { db } from '../../db/db.js'
 import jwt from 'jsonwebtoken'
 import crypto from "crypto";
 import { createAccessToken } from './create.js'
+import {} from 'dotenv/config'
 
 export const login = async (
   req,
@@ -52,8 +53,7 @@ export const verifyAccessToken = async (
   const token = authHeader && authHeader.split(' ')[1]
   if (token === null) return sendStatus(401)
 
-  //Change to env var
-  jwt.verify(token, 'secret', (err, user) => {
+  jwt.verify(token, `${process.env.JWT_KEY}`, (err, user) => {
     //Invalid token
     if (err) return res.sendStatus(403)
     //valid token
