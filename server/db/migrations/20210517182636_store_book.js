@@ -1,5 +1,5 @@
 
-exports.up = function(knex) {
+export const up = function(knex) {
   return knex.schema.createTable('store_book', (table) => {
     table.increments('id').primary();
     table.integer('quantity').unsigned().notNullable().defaultTo(0);
@@ -26,6 +26,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+export const down = function(knex) {
   return knex.schema.dropTable('store_book');
 };
